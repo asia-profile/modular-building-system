@@ -77,7 +77,7 @@ public class BuildingManager : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.A)) 
             {
-                ScaleDownZ();
+                ScaleUpZ();
             }
             if (Input.GetKeyDown(KeyCode.D)) 
             {
