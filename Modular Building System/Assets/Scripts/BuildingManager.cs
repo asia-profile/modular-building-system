@@ -19,9 +19,17 @@ public class BuildingManager : MonoBehaviour
     
     bool gridOn = true;
     public bool canPlace = true;
-    
+    float height;
+    public float scale = 0.2f;
+
 
     [SerializeField] private Toggle gridToggle;
+
+    private void Start()
+    {
+        Vector3 boxHeight = pendingObject.GetComponent<MeshRenderer>().bounds.size;
+        height = boxHeight.y;
+    }
 
     // Update is called once per frame
     void Update()
@@ -50,15 +58,43 @@ public class BuildingManager : MonoBehaviour
                 RotateObject();
             }
             //UpdateMaterials();
+            if (Input.GetKeyDown(KeyCode.E)) //scale up
+            {
+                ScaleUp();
+            }
+            if (Input.GetKeyDown(KeyCode.Q)) //scale down
+            {
+                //transform.localScale = transform.localScale + new Vector3(0, -scale, 0);
+                ScaleDown();
+            }
+            if (Input.GetKeyDown(KeyCode.W)) 
+            {
+                ScaleUpX();
+            }
+            if (Input.GetKeyDown(KeyCode.S)) 
+            {
+                ScaleDownX();
+            }
+            if (Input.GetKeyDown(KeyCode.A)) 
+            {
+                ScaleDownZ();
+            }
+            if (Input.GetKeyDown(KeyCode.D)) 
+            {
+                ScaleDownZ();
+            }
         }
     }
 
     void FixedUpdate()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //where to put the object
-        if (Physics.Raycast(ray, out hit, 1000, layerMask)) //how far ray goes
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
+        if (Physics.Raycast(ray, out hit, 1000, layerMask)) 
         {
-            position = hit.point; //get raycast hit and impact point - where to put ut
+            position = hit.point;
+            //Vector3 boxHeight = pendingObject.GetComponent<MeshRenderer>().bounds.size;
+            //float height = boxHeight.y;
+            position = hit.point + (0.5f * height * Vector3.up);
         }
     }
 
@@ -74,7 +110,7 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-    //need to select objects in game
+   
     public void SelectObject(int index) 
     {
         pendingObject = Instantiate(objects[index], position, transform.rotation);
@@ -89,6 +125,35 @@ public class BuildingManager : MonoBehaviour
    public void RotateObject()
     {
         pendingObject.transform.Rotate(Vector3.up, rotateAmount);
+    }
+
+    public void ScaleUp() 
+    {
+        pendingObject.transform.localScale = pendingObject.transform.localScale + new Vector3(0, scale, 0);
+    }
+
+    public void ScaleDown()
+    {
+        pendingObject.transform.localScale = pendingObject.transform.localScale + new Vector3(0, -scale, 0);
+    }
+
+    public void ScaleUpX()
+    {
+        pendingObject.transform.localScale = pendingObject.transform.localScale + new Vector3(scale, 0, 0);
+    }
+
+    public void ScaleDownX()
+    {
+        pendingObject.transform.localScale = pendingObject.transform.localScale + new Vector3(-scale, 0, 0);
+    }
+
+    public void ScaleUpZ()
+    {
+        pendingObject.transform.localScale = pendingObject.transform.localScale + new Vector3(0, 0, scale);
+    }
+    public void ScaleDownZ()
+    {
+        pendingObject.transform.localScale = pendingObject.transform.localScale + new Vector3(0, 0, -scale);
     }
 
     public void ToggleGrid()

@@ -1931,7 +1931,7 @@ MonoBehaviour:
   - {fileID: 206589994146575613, guid: 74fd935e27c025545a314b0be38f7886, type: 3}
   - {fileID: 8692165326581468686, guid: 4f1cb036caa2a1249b24fbff1409cbc6, type: 3}
   - {fileID: 6156545152594387487, guid: 4864f05ef1ddc964db913968bfcf0c08, type: 3}
-  pendingObject: {fileID: 0}
+  pendingObject: {fileID: 206589994146575613, guid: 74fd935e27c025545a314b0be38f7886, type: 3}
   materials:
   - {fileID: 2100000, guid: d22ab68c3ff4c2642975bd54b96f8737, type: 2}
   - {fileID: 2100000, guid: 037f8bbf3ebd58247ab6281b1f85597d, type: 2}
